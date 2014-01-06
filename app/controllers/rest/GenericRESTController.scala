@@ -1,4 +1,4 @@
-package controllers
+package controllers.rest
 
 import play.api.mvc._
 import play.api.libs.json._
@@ -57,6 +57,17 @@ abstract class GenericRESTController[Key <: Long, Value](val dao: CrudDAO[Key, V
     case other => Json.arr(other)
   })
   val inTransformer = (__ \ root).json.pick
+
+
+  def wrapResponse(value: Value) = Json.toJson(value).transform(outTransformer).fold(
+    valid = json => Ok(json),
+    invalid = err => BadRequest(err.toJson)
+  )
+
+  def wrapResponse(values: List[Value]) = Json.toJson(values).transform(outTransformer).fold(
+    valid = json => Ok(json),
+    invalid = err => BadRequest(err.toJson)
+  )
 
   def index = Action.async(parse.empty) {
     request =>

@@ -1,0 +1,23 @@
+<div class="panel small-12 medium-8 large-6 small-centered columns">
+    <h5>
+        Register
+        <small>{{#link-to "login"}}Login{{/link-to}}</small>
+    </h5>
+    <form>
+        {{partial "user-form"}}
+        <div class="row">
+            <div class="small-4 columns">
+                <label for="inputConfirmation" class="right inline">Confirmation</label>
+            </div>
+            <div class="small-8 columns">
+                {{input type="password" id="inputConfirmation" placeholder="Confirmation" value=confirmation}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-8 small-push-4 columns">
+                <button type="submit" class="button small" {{action "register"}}>Register</button>
+                <a href="#" class="button small secondary" {{action "cancel"}}>Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

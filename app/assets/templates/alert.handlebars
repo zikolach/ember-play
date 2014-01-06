@@ -1,0 +1,6 @@
+{{#if message}}
+    <div data-alert {{bind-attr class=":alert-box :radius messageClass"}}>
+        {{message}}
+        <a href="#" class="close" {{action close}}>&times;</a>
+    </div>
+{{/if}}

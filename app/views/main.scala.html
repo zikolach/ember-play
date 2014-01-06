@@ -12,14 +12,30 @@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     </head>
     <body>
-        @content
-
+        <!-- common libraries -->
         <script src="@routes.Assets.at("javascripts/libs/modernizr.js")"></script>
         <script src="@routes.Assets.at("javascripts/libs/jquery-1.10.2.js")"></script>
         <script src="@routes.Assets.at("javascripts/libs/foundation.min.js")"></script>
         <script src="@routes.Assets.at("javascripts/libs/handlebars-1.1.2.js")"></script>
         <script src="@routes.Assets.at("javascripts/libs/ember-1.2.0.js")"></script>
+        <script src="@routes.Assets.at("javascripts/libs/ember-data.js")"></script>
+        <!-- ember auth -->
+        <script src="@routes.Assets.at("javascripts/libs/ember-auth/ember-auth.js")"></script>
+        <script src="@routes.Assets.at("javascripts/libs/ember-auth/ember-auth-module-ember-data.js")"></script>
+        <script src="@routes.Assets.at("javascripts/libs/ember-auth/ember-auth-module-rememberable.js")"></script>
+        <script src="@routes.Assets.at("javascripts/libs/ember-auth/ember-auth-request-jquery.js")"></script>
+        <script src="@routes.Assets.at("javascripts/libs/ember-auth/ember-auth-response-json.js")"></script>
+        <script src="@routes.Assets.at("javascripts/libs/ember-auth/ember-auth-session-cookie.js")"></script>
+        <script src="@routes.Assets.at("javascripts/libs/ember-auth/ember-auth-strategy-token.js")"></script>
+        <script src="@routes.Assets.at("javascripts/libs/ember-auth/ember-auth-module-auth-redirectable.js")"></script>
+        <script src="@routes.Assets.at("javascripts/libs/ember-auth/ember-auth-module-action-redirectable.js")"></script>
+        <!-- templates -->
         <script src="@routes.Assets.at("templates/templates.pre.js")"></script>
+        <!-- application logic -->
+        @content
         <script src="@routes.Assets.at("javascripts/app.js")"></script>
+        <script src="@routes.Assets.at("javascripts/controllers/profile.js")"></script>
+        <script src="@routes.Assets.at("javascripts/models/user.js")"></script>
+
     </body>
 </html>

@@ -5,6 +5,12 @@
 # Home page
 GET     /                           controllers.Application.index
 
+# Auth
+POST    /api/v1/register            controllers.Auth.register
+POST    /api/v1/login               controllers.Auth.login
+DELETE  /api/v1/logout              controllers.Auth.logout
+GET     /api/v1/confirm             controllers.Auth.confirm
+
 # Users
 GET     /api/v1/users               controllers.rest.UsersController.index
 GET     /api/v1/users/:id           controllers.rest.UsersController.get(id: Int)

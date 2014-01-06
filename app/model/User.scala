@@ -4,11 +4,25 @@ import scala.concurrent.{Promise, ExecutionContext, Future}
 import ExecutionContext.Implicits.global
 import scala.util.{Failure, Success, Random}
 import play.api.libs.json.Json
-import controllers.rest.CrudDAO
 
-case class Address(city: String, street: String)
+case class Address(postcode: Option[String] = None,
+                   city: String,
+                   street: String,
+                   house: Option[String] = None,
+                   building: Option[String] = None)
 
-case class Names(firstName: String, lastName: String)
+object Address {
+
+  implicit val addressFormat = Json.format[Address]
+
+  def genRandom = Address(
+    postcode = Some((1 to 6).map((n: Int) => Random.nextInt(10)).mkString),
+    city = Random.alphanumeric.take(Random.nextInt(10) + 10).mkString,
+    street = Random.alphanumeric.take(Random.nextInt(10) + 10).mkString
+  )
+}
+
+case class Names(firstName: String, middleName: Option[String] = None, lastName: String)
 
 case class User(id: Option[Long],
                 email: Option[String],
@@ -22,7 +36,7 @@ object User extends CrudDAO[Long, User] {
 
   object UserNotFoundException extends Exception("User not found")
 
-  implicit val addressFormat = Json.format[Address]
+
   implicit val namesFormat = Json.format[Names]
   implicit val userFormat = Json.format[User]
 
@@ -32,13 +46,10 @@ object User extends CrudDAO[Long, User] {
       email = Some(Random.alphanumeric.take(Random.nextInt(10)).mkString),
       password = Some(Random.alphanumeric.take(Random.nextInt(10)).mkString),
       names = Some(Names(
-        Random.alphanumeric.take(Random.nextInt(10)).mkString,
-        Random.alphanumeric.take(Random.nextInt(10)).mkString
+        firstName = Random.alphanumeric.take(Random.nextInt(10)).mkString,
+        lastName = Random.alphanumeric.take(Random.nextInt(10)).mkString
       )),
-      address = Some(Address(
-        Random.alphanumeric.take(Random.nextInt(10)).mkString,
-        Random.alphanumeric.take(Random.nextInt(10)).mkString
-      ))
+      address = Some(Address.genRandom)
     )
   ).toMap
 
